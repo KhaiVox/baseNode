@@ -5,7 +5,7 @@ const { mongooseToObject } = require('../../util/mongoose')
 const Course = require('../models/Course')
 
 class CoursesController {
-    // GET /courses/:slug
+    // [GET] /courses/:slug
     show(req, res, next) {
         // req.params.slug: chứa thông tin slug
         Course.findOne({ slug: req.params.slug })
@@ -15,12 +15,12 @@ class CoursesController {
             .catch(next)
     }
 
-    // GET /courses/create
+    // [GET] /courses/create
     create(req, res, next) {
         res.render('courses/create')
     }
 
-    // POST /courses/store
+    // [POST] /courses/store
     store(req, res, next) {
         const formData = req.body
         // link ảnh kiểu của youtube
@@ -31,6 +31,25 @@ class CoursesController {
             // sau khi lưu thành công sẽ quay về trang chúng ta thiết lập bên dưới
             .then(() => res.redirect('/'))
             .catch((error) => {})
+    }
+
+    // [GET] /courses/:id/edit
+    edit(req, res, next) {
+        Course.findById(req.params.id)
+            .then((course) =>
+                res.render('courses/edit', {
+                    course: mongooseToObject(course),
+                }),
+            )
+            .catch(next)
+    }
+
+    // [PUT] /courses/:id
+    update(req, res, next) {
+        Course.updateOne({ _id: req.params.id }, req.body)
+            // lưu thành công sẽ chuyển hướng
+            .then(() => res.redirect('/me/stored/courses'))
+            .catch(next)
     }
 }
 
