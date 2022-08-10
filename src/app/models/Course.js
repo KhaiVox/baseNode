@@ -23,6 +23,6 @@ const Course = new Schema(
 mongoose.plugin(slug)
 // deleteAt: tự động thêm thời gian xóa
 // overrideMethods: ẩn những item đã được xóa mềm
-Course.plugin(mongooseDelete, { deleteAt: true, overrideMethods: 'all' })
+Course.plugin(mongooseDelete, { deletedAt: true, overrideMethods: 'all' })
 
 module.exports = mongoose.model('Course', Course)

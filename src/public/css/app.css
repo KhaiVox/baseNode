@@ -1,2 +1,5 @@
 .card-course-item {
   margin-top: 30px; }
+
+a[href] {
+  text-decoration: none; }
