@@ -65,11 +65,25 @@ class CoursesController {
             .catch(next)
     }
 
-    // [RESTORE] /courses/:id/restore
+    // [PATH] /courses/:id/restore
     restore(req, res, next) {
         Course.restore({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next)
+    }
+
+    // [POST] /courses/handle-form-actions
+    handleFormActions(req, res, next) {
+        switch(req.body.action) {
+            case 'delete':
+                // _id: { $in: req.body.courseIds: lấy tất cả các id có trong list đã chọn này
+                Course.delete({ _id: { $in: req.body.courseIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next)
+                break
+            default:
+                res.json({ message: 'Action is invalid!' })
+        }
     }
 }
 
