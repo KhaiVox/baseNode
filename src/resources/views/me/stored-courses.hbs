@@ -130,15 +130,6 @@
             renderCheckAllSubmitBtn()
         })
 
-        // Check all submit button clicked
-        checkAllSubmitBtn.on('submit', function(e) {
-            // nếu có class disabled sẽ chặn sự kiện submit
-            var isSubmittable = $(this).hasClass('disabled')
-            if(isSubmittable) {
-                e.preventDefault()
-            }
-        })
-
         // Re-render check all submit button
         function renderCheckAllSubmitBtn() {
             var checkedCount = $('input[name="courseIds[]"]:checked').length  
