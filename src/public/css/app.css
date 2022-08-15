@@ -7,3 +7,6 @@ a[href] {
 .checkbox-select-all-option {
   width: 220px;
   margin: 0 16px; }
+
+.btn-add-course {
+  margin-left: auto; }
